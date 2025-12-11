@@ -3,6 +3,9 @@ package com.example;
 import static spark.Spark.*;
 import com.google.gson.Gson;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class ApiServer {
     private final Config cfg;
     private final CacheService cache;
@@ -18,11 +21,13 @@ public class ApiServer {
         get("/stats", (req, res) -> {
             res.type("application/json");
             AggregationResult r = cache.getAggregated();
-            return gson.toJson(new java.util.HashMap<String,Object>() {{
-                put("buckets", r.getBuckets());
-                put("totalSamples", r.getTotalSamples());
-                put("updatedAt", System.currentTimeMillis());
-            }});
+            System.out.println(new Gson().toJson(r));
+            Map<String, Object> map = new HashMap<>();
+            map.put("buckets", r.getBuckets());
+            map.put("totalSamples", r.getTotalSamples());
+            map.put("updatedAt", System.currentTimeMillis());
+
+            return gson.toJson(map);
         });
         get("/health", (req,res) -> "ok");
     }
