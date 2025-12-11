@@ -1,7 +1,7 @@
 # ================================
-#  Stage 1: Build with Maven
+# Stage 1: Build with Maven (JDK 8)
 # ================================
-FROM maven:3.8.5-openjdk-8 AS build
+FROM maven:3.8.5-eclipse-temurin-8 AS build
 
 WORKDIR /app
 
@@ -11,9 +11,9 @@ COPY src ./src
 RUN mvn -e -B -DskipTests=true clean package
 
 # ================================
-#  Stage 2: Runtime
+# Stage 2: Runtime (JRE 8)
 # ================================
-FROM openjdk:8-jre-slim
+FROM eclipse-temurin:8-jre
 
 WORKDIR /app
 
