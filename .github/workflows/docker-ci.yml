@@ -28,11 +28,11 @@ jobs:
       - name: Login to Docker Hub
         uses: docker/login-action@v2
         with:
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_TOKEN }}
+          username: a1206256980
+          password: dckr_pat_UWXdD8BdUnWOlVdO5rLVfppSiDU
 
       - name: Build image
-        run: docker build -t ${{ secrets.DOCKER_USERNAME }}/binance-u-analyzer:latest .
+        run: docker build -t a1206256980/binance-u-analyzer:latest .
 
       - name: Push image
-        run: docker push ${{ secrets.DOCKER_USERNAME }}/binance-u-analyzer:latest
+        run: docker push a1206256980/binance-u-analyzer:latest
